@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(15, 25%, 97%);
+  --foreground: hsl(15, 25%, 15%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(15, 25%, 15%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(15, 25%, 15%);
+  --primary: hsl(15, 35%, 75%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(15, 15%, 90%);
+  --secondary-foreground: hsl(15, 25%, 25%);
+  --muted: hsl(15, 10%, 95%);
+  --muted-foreground: hsl(15, 15%, 45%);
+  --accent: hsl(35, 50%, 88%);
+  --accent-foreground: hsl(15, 25%, 25%);
+  --destructive: hsl(0, 70%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(15, 15%, 88%);
+  --input: hsl(15, 15%, 88%);
+  --ring: hsl(15, 35%, 75%);
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: hsl(15, 10%, 4%);
+  --foreground: hsl(0, 0%, 95%);
+  --card: hsl(15, 10%, 6%);
+  --card-foreground: hsl(0, 0%, 95%);
+  --popover: hsl(15, 10%, 6%);
+  --popover-foreground: hsl(0, 0%, 95%);
+  --primary: hsl(15, 35%, 75%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(15, 10%, 15%);
+  --secondary-foreground: hsl(0, 0%, 95%);
+  --muted: hsl(15, 5%, 12%);
+  --muted-foreground: hsl(15, 10%, 55%);
+  --accent: hsl(35, 50%, 25%);
+  --accent-foreground: hsl(0, 0%, 95%);
+  --destructive: hsl(0, 70%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(15, 10%, 15%);
+  --input: hsl(15, 10%, 15%);
+  --ring: hsl(15, 35%, 75%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', var(--font-serif);
+  }
+}
+
+@layer components {
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--primary-foreground);
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(212, 165, 165, 0.3);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, var(--background) 0%, var(--muted) 50%, var(--accent) 100%);
+  }
+}
