@@ -1,4 +1,5 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
+import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -13,7 +14,28 @@ import Login from "@/pages/login";
 import Navbar from "@/components/layout/navbar";
 import ProtectedRoute from "@/components/auth/protected-route";
 
+// Handle GitHub Pages redirect format (/?/path)
+function useGitHubPagesRedirect() {
+  const [, setLocation] = useLocation();
+  
+  useEffect(() => {
+    const search = window.location.search;
+    
+    // Check if we have the GitHub Pages redirect format: /?/path
+    // The redirect script converts /RosaSalon/dashboard to /RosaSalon/?/dashboard
+    if (search.startsWith('?/')) {
+      const redirectPath = '/' + search.slice(2).replace(/~and~/g, '&').split('&')[0];
+      setLocation(redirectPath);
+      // Clean up the URL - remove the query parameter
+      const newUrl = window.location.pathname + (window.location.hash || '');
+      window.history.replaceState({}, '', newUrl);
+    }
+  }, [setLocation]);
+}
+
 function Router() {
+  useGitHubPagesRedirect();
+  
   return (
     <>
       <Navbar />
