@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Beauty Salon - Professional Beauty Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'salon-primary': '#E8B4CB',
+                        'salon-secondary': '#F8F6F3',
+                        'salon-accent': '#D4A574',
+                        'salon-neutral': '#6B7280',
+                        'salon-bg': '#FEFCFB',
+                        'salon-text': '#374151'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-salon-bg font-inter text-salon-text">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-salon-primary">Bella Beauty</h1>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="text-salon-text hover:text-salon-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="#services" class="text-salon-text hover:text-salon-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Services</a>
+                        <a href="#booking" class="text-salon-text hover:text-salon-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Book Now</a>
+                        <a href="#dashboard" class="text-salon-text hover:text-salon-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button">
+                        <i class="fas fa-bars text-salon-text"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gradient-to-br from-salon-secondary to-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <h2 class="text-4xl font-bold text-salon-text mb-6">Transform Your Beauty at Bella Beauty Salon</h2>
+                    <p class="text-xl text-salon-neutral mb-8">Experience professional hair, eye, and beauty services in our luxurious salon environment. Book your appointment today.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-salon-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                            Book Appointment
+                        </button>
+                        <button class="border border-salon-primary text-salon-primary hover:bg-salon-primary hover:text-white px-8 py-3 rounded-lg font-medium transition-colors">
+                            View Services
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- Professional beauty salon interior with modern styling -->
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="Modern beauty salon interior" 
+                         class="rounded-xl shadow-2xl w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-salon-text mb-4">Our Services</h2>
+                <p class="text-xl text-salon-neutral">Professional beauty services tailored to your needs</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Hair Services -->
+                <div class="bg-salon-secondary rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="mb-6">
+                        <!-- Professional hair styling in a salon -->
+                        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" 
+                             alt="Professional hair styling" 
+                             class="rounded-lg w-full h-48 object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold text-salon-text mb-4">Hair Services</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Haircut & Style</span>
+                            <span class="font-medium">$65</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Color & Highlights</span>
+                            <span class="font-medium">$120</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Blowout</span>
+                            <span class="font-medium">$45</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Hair Treatment</span>
+                            <span class="font-medium">$80</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-salon-primary hover:bg-opacity-90 text-white py-3 rounded-lg font-medium transition-colors">
+                        Book Hair Service
+                    </button>
+                </div>
+
+                <!-- Eye Services -->
+                <div class="bg-salon-secondary rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="mb-6">
+                        <!-- Professional eyebrow and lash treatment -->
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" 
+                             alt="Professional eyebrow and lash treatment" 
+                             class="rounded-lg w-full h-48 object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold text-salon-text mb-4">Eye Services</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Eyebrow Shaping</span>
+                            <span class="font-medium">$35</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Lash Extensions</span>
+                            <span class="font-medium">$150</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Lash Lift & Tint</span>
+                            <span class="font-medium">$85</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Eyebrow Tinting</span>
+                            <span class="font-medium">$25</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-salon-primary hover:bg-opacity-90 text-white py-3 rounded-lg font-medium transition-colors">
+                        Book Eye Service
+                    </button>
+                </div>
+
+                <!-- Other Services -->
+                <div class="bg-salon-secondary rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="mb-6">
+                        <!-- Professional facial and skincare treatment -->
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" 
+                             alt="Professional facial and skincare treatment" 
+                             class="rounded-lg w-full h-48 object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold text-salon-text mb-4">Other Services</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Facial Treatment</span>
+                            <span class="font-medium">$95</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Manicure & Pedicure</span>
+                            <span class="font-medium">$70</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Makeup Application</span>
+                            <span class="font-medium">$60</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-salon-neutral">Waxing Services</span>
+                            <span class="font-medium">$40</span>
+                        </div>
+                    </div>
+                    <button class="w-full bg-salon-primary hover:bg-opacity-90 text-white py-3 rounded-lg font-medium transition-colors">
+                        Book Other Service
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-16 bg-salon-secondary">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-salon-text mb-4">Book Your Appointment</h2>
+                <p class="text-xl text-salon-neutral">Schedule your beauty session with our expert stylists</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-salon-text mb-2">First Name</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors" placeholder="Enter your first name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-salon-text mb-2">Last Name</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors" placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-salon-text mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors" placeholder="Enter your email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-salon-text mb-2">Phone</label>
+                            <input type="tel" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors" placeholder="Enter your phone number">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-salon-text mb-2">Service Category</label>
+                        <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors">
+                            <option>Select a service category</option>
+                            <option>Hair Services</option>
+                            <option>Eye Services</option>
+                            <option>Other Services</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-salon-text mb-2">Specific Service</label>
+                        <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors">
+                            <option>Select a specific service</option>
+                            <option>Haircut & Style - $65</option>
+                            <option>Color & Highlights - $120</option>
+                            <option>Eyebrow Shaping - $35</option>
+                            <option>Lash Extensions - $150</option>
+                            <option>Facial Treatment - $95</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-salon-text mb-2">Preferred Date</label>
+                            <input type="date" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-salon-text mb-2">Preferred Time</label>
+                            <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors">
+                                <option>Select a time</option>
+                                <option>9:00 AM</option>
+                                <option>10:00 AM</option>
+                                <option>11:00 AM</option>
+                                <option>12:00 PM</option>
+                                <option>1:00 PM</option>
+                                <option>2:00 PM</option>
+                                <option>3:00 PM</option>
+                                <option>4:00 PM</option>
+                                <option>5:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-salon-text mb-2">Special Requests</label>
+                        <textarea rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-salon-primary focus:border-salon-primary transition-colors" placeholder="Any special requests or notes..."></textarea>
+                    </div>
+                    
+                    <!-- Down Payment Section -->
+                    <div class="bg-salon-secondary rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-salon-text mb-4">Down Payment (Optional)</h3>
+                        <p class="text-salon-neutral mb-4">Secure your appointment with a down payment. Final payment will be made in person.</p>
+                        
+                        <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                            <button type="button" class="flex items-center justify-center gap-2 bg-black text-white py-3 px-4 rounded-lg hover:bg-gray-800 transition-colors">
+                                <i class="fab fa-apple"></i>
+                                <span>Apple Pay</span>
+                            </button>
+                            <button type="button" class="flex items-center justify-center gap-2 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fab fa-google"></i>
+                                <span>Google Pay</span>
+                            </button>
+                            <button type="button" class="flex items-center justify-center gap-2 bg-gray-700 text-white py-3 px-4 rounded-lg hover:bg-gray-800 transition-colors">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Debit Card</span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-sm text-salon-neutral">
+                            <span>Down Payment Amount:</span>
+                            <span class="font-medium">$25.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button type="button" class="flex-1 bg-salon-primary hover:bg-opacity-90 text-white py-3 rounded-lg font-medium transition-colors">
+                            Book Appointment
+                        </button>
+                        <button type="button" class="flex-1 border border-salon-primary text-salon-primary hover:bg-salon-primary hover:text-white py-3 rounded-lg font-medium transition-colors">
+                            Save as Draft
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-salon-text mb-4">Appointment Dashboard</h2>
+                <p class="text-xl text-salon-neutral">Manage your salon appointments and customer communications</p>
+            </div>
+            
+            <!-- Dashboard Navigation -->
+            <div class="mb-8">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8">
+                        <button class="dashboard-tab active border-b-2 border-salon-primary text-salon-primary py-2 px-1 text-sm font-medium">
+                            Appointments
+                        </button>
+                        <button class="dashboard-tab border-b-2 border-transparent text-salon-neutral hover:text-salon-text py-2 px-1 text-sm font-medium">
+                            Messages
+                        </button>
+                        <button class="dashboard-tab border-b-2 border-transparent text-salon-neutral hover:text-salon-text py-2 px-1 text-sm font-medium">
+                            Services
+                        </button>
+                        <button class="dashboard-tab border-b-2 border-transparent text-salon-neutral hover:text-salon-text py-2 px-1 text-sm font-medium">
+                            Customers
+                        </button>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- Appointments Tab -->
+            <div class="dashboard-content" id="appointments-tab">
+                <div class="grid lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-salon-secondary rounded-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 bg-salon-primary rounded-full">
+                                <i class="fas fa-calendar-check text-white"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-salon-neutral">Today's Appointments</p>
+                                <p class="text-2xl font-semibold text-salon-text">8</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-salon-secondary rounded-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 bg-salon-accent rounded-full">
+                                <i class="fas fa-clock text-white"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-salon-neutral">Pending Confirmations</p>
+                                <p class="text-2xl font-semibold text-salon-text">3</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-salon-secondary rounded-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 bg-green-500 rounded-full">
+                                <i class="fas fa-dollar-sign text-white"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-salon-neutral">Today's Revenue</p>
+                                <p class="text-2xl font-semibold text-salon-text">$680</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Appointments Table -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-salon-text">Upcoming Appointments</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-salon-secondary">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Customer</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Service</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Date & Time</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-salon-primary rounded-full flex items-center justify-center">
+                                                <span class="text-white font-medium">SA</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-salon-text">Sarah Anderson</div>
+                                                <div class="text-sm text-salon-neutral">sarah@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Haircut & Style</div>
+                                        <div class="text-sm text-salon-neutral">$65</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Today, 10:00 AM</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-salon-primary hover:text-salon-accent mr-3">Edit</button>
+                                        <button class="text-red-600 hover:text-red-900">Cancel</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-salon-accent rounded-full flex items-center justify-center">
+                                                <span class="text-white font-medium">MJ</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-salon-text">Maria Johnson</div>
+                                                <div class="text-sm text-salon-neutral">maria@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Lash Extensions</div>
+                                        <div class="text-sm text-salon-neutral">$150</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Today, 2:00 PM</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-salon-primary hover:text-salon-accent mr-3">Edit</button>
+                                        <button class="text-red-600 hover:text-red-900">Cancel</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                                                <span class="text-white font-medium">LD</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-salon-text">Lisa Davis</div>
+                                                <div class="text-sm text-salon-neutral">lisa@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Facial Treatment</div>
+                                        <div class="text-sm text-salon-neutral">$95</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Tomorrow, 11:00 AM</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-salon-primary hover:text-salon-accent mr-3">Edit</button>
+                                        <button class="text-red-600 hover:text-red-900">Cancel</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Messages Tab -->
+            <div class="dashboard-content hidden" id="messages-tab">
+                <div class="grid lg:grid-cols-3 gap-6">
+                    <!-- Message List -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-lg shadow-lg">
+                            <div class="px-6 py-4 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-salon-text">Messages</h3>
+                            </div>
+                            <div class="divide-y divide-gray-200">
+                                <div class="p-4 hover:bg-salon-secondary cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-salon-primary rounded-full flex items-center justify-center">
+                                            <span class="text-white font-medium">SA</span>
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                            <div class="text-sm font-medium text-salon-text">Sarah Anderson</div>
+                                            <div class="text-sm text-salon-neutral truncate">Can I reschedule my appointment?</div>
+                                        </div>
+                                        <div class="text-xs text-salon-neutral">2m ago</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 hover:bg-salon-secondary cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-salon-accent rounded-full flex items-center justify-center">
+                                            <span class="text-white font-medium">MJ</span>
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                            <div class="text-sm font-medium text-salon-text">Maria Johnson</div>
+                                            <div class="text-sm text-salon-neutral truncate">Thank you for the reminder!</div>
+                                        </div>
+                                        <div class="text-xs text-salon-neutral">15m ago</div>
+                                    </div>
+                                </div>
+                                <div class="p-4 hover:bg-salon-secondary cursor-pointer">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-medium">LD</span>
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                            <div class="text-sm font-medium text-salon-text">Lisa Davis</div>
+                                            <div class="text-sm text-salon-neutral truncate">What products do you recommend?</div>
+                                        </div>
+                                        <div class="text-xs text-salon-neutral">1h ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Message Conversation -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-lg shadow-lg h-96 flex flex-col">
+                            <!-- Message Header -->
+                            <div class="px-6 py-4 border-b border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-salon-primary rounded-full flex items-center justify-center">
+                                        <span class="text-white font-medium">SA</span>
+                                    </div>
+                                    <div class="ml-3">
+                                        <div class="text-sm font-medium text-salon-text">Sarah Anderson</div>
+                                        <div class="text-sm text-green-600">Online</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Message Content -->
+                            <div class="flex-1 p-6 overflow-y-auto">
+                                <div class="space-y-4">
+                                    <div class="flex">
+                                        <div class="bg-salon-secondary rounded-lg p-3 max-w-xs">
+                                            <p class="text-sm text-salon-text">Hi! Can I reschedule my appointment from tomorrow to Thursday?</p>
+                                            <p class="text-xs text-salon-neutral mt-1">2:15 PM</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div class="bg-salon-primary rounded-lg p-3 max-w-xs">
+                                            <p class="text-sm text-white">Of course! Let me check our availability for Thursday.</p>
+                                            <p class="text-xs text-salon-secondary mt-1">2:16 PM</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <div class="bg-salon-primary rounded-lg p-3 max-w-xs">
+                                            <p class="text-sm text-white">We have slots available at 10 AM and 2 PM on Thursday. Which would you prefer?</p>
+                                            <p class="text-xs text-salon-secondary mt-1">2:17 PM</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="bg-salon-secondary rounded-lg p-3 max-w-xs">
+                                            <p class="text-sm text-salon-text">Perfect! I'll take the 2 PM slot please.</p>
+                                            <p class="text-xs text-salon-neutral mt-1">2:18 PM</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Message Input -->
+                            <div class="px-6 py-4 border-t border-gray-200">
+                                <div class="flex items-center space-x-3">
+                                    <input type="text" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-salon-primary focus:border-salon-primary" placeholder="Type your message...">
+                                    <button class="bg-salon-primary hover:bg-opacity-90 text-white p-2 rounded-lg">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Services Tab -->
+            <div class="dashboard-content hidden" id="services-tab">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-salon-text">Manage Services</h3>
+                    <button class="bg-salon-primary hover:bg-opacity-90 text-white px-4 py-2 rounded-lg font-medium">
+                        <i class="fas fa-plus mr-2"></i>Add Service
+                    </button>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service Management Cards -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg font-semibold text-salon-text">Haircut & Style</h4>
+                            <div class="flex space-x-2">
+                                <button class="text-salon-primary hover:text-salon-accent">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Price:</span>
+                                <span class="font-medium">$65</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Duration:</span>
+                                <span class="font-medium">60 min</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Category:</span>
+                                <span class="font-medium">Hair</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg font-semibold text-salon-text">Lash Extensions</h4>
+                            <div class="flex space-x-2">
+                                <button class="text-salon-primary hover:text-salon-accent">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Price:</span>
+                                <span class="font-medium">$150</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Duration:</span>
+                                <span class="font-medium">120 min</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Category:</span>
+                                <span class="font-medium">Eye</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg font-semibold text-salon-text">Facial Treatment</h4>
+                            <div class="flex space-x-2">
+                                <button class="text-salon-primary hover:text-salon-accent">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Price:</span>
+                                <span class="font-medium">$95</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Duration:</span>
+                                <span class="font-medium">75 min</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-salon-neutral">Category:</span>
+                                <span class="font-medium">Other</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Customers Tab -->
+            <div class="dashboard-content hidden" id="customers-tab">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-salon-text">Customer Database</h3>
+                    <button class="bg-salon-primary hover:bg-opacity-90 text-white px-4 py-2 rounded-lg font-medium">
+                        <i class="fas fa-plus mr-2"></i>Add Customer
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-lg font-semibold text-salon-text">All Customers</h4>
+                            <div class="flex items-center space-x-2">
+                                <input type="text" class="px-3 py-2 border border-gray-300 rounded-lg text-sm" placeholder="Search customers...">
+                                <button class="bg-salon-secondary text-salon-text px-3 py-2 rounded-lg text-sm">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-salon-secondary">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Customer</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Contact</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Last Visit</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Total Spent</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-salon-neutral uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-salon-primary rounded-full flex items-center justify-center">
+                                                <span class="text-white font-medium">SA</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-salon-text">Sarah Anderson</div>
+                                                <div class="text-sm text-salon-neutral">Regular Customer</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">sarah@email.com</div>
+                                        <div class="text-sm text-salon-neutral">(555) 123-4567</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Dec 15, 2023</div>
+                                        <div class="text-sm text-salon-neutral">Haircut & Style</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-salon-text">$320</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-salon-primary hover:text-salon-accent mr-3">View</button>
+                                        <button class="text-blue-600 hover:text-blue-900">Message</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-salon-accent rounded-full flex items-center justify-center">
+                                                <span class="text-white font-medium">MJ</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-salon-text">Maria Johnson</div>
+                                                <div class="text-sm text-salon-neutral">VIP Customer</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">maria@email.com</div>
+                                        <div class="text-sm text-salon-neutral">(555) 987-6543</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Dec 12, 2023</div>
+                                        <div class="text-sm text-salon-neutral">Lash Extensions</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-salon-text">$850</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-salon-primary hover:text-salon-accent mr-3">View</button>
+                                        <button class="text-blue-600 hover:text-blue-900">Message</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                                                <span class="text-white font-medium">LD</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-salon-text">Lisa Davis</div>
+                                                <div class="text-sm text-salon-neutral">New Customer</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">lisa@email.com</div>
+                                        <div class="text-sm text-salon-neutral">(555) 456-7890</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-salon-text">Dec 10, 2023</div>
+                                        <div class="text-sm text-salon-neutral">Facial Treatment</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-salon-text">$95</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-salon-primary hover:text-salon-accent mr-3">View</button>
+                                        <button class="text-blue-600 hover:text-blue-900">Message</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-salon-text text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold text-salon-primary mb-4">Bella Beauty</h3>
+                    <p class="text-gray-300 mb-4">Your trusted beauty destination for professional hair, eye, and beauty services. Experience luxury and quality in every visit.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-salon-primary">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-salon-primary">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-salon-primary">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-salon-primary">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-300 hover:text-salon-primary">Services</a></li>
+                        <li><a href="#booking" class="text-gray-300 hover:text-salon-primary">Book Appointment</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-salon-primary">About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-salon-primary">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fas fa-map-marker-alt mr-2"></i>123 Beauty Street, City, State 12345</p>
+                        <p><i class="fas fa-phone mr-2"></i>(555) 123-4567</p>
+                        <p><i class="fas fa-envelope mr-2"></i>info@bellabeauty.com</p>
+                        <p><i class="fas fa-clock mr-2"></i>Mon-Sat: 9AM-7PM, Sun: 10AM-5PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2023 Bella Beauty Salon. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // TODO: Implement business logic, API calls, and state management
+        
+        (function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    // TODO: Toggle mobile menu visibility
+                    console.log('Mobile menu toggled');
+                });
+            }
+            
+            // Dashboard tab switching
+            const dashboardTabs = document.querySelectorAll('.dashboard-tab');
+            const dashboardContents = document.querySelectorAll('.dashboard-content');
+            
+            dashboardTabs.forEach((tab, index) => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    dashboardTabs.forEach(t => {
+                        t.classList.remove('active', 'border-salon-primary', 'text-salon-primary');
+                        t.classList.add('border-transparent', 'text-salon-neutral');
+                    });
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active', 'border-salon-primary', 'text-salon-primary');
+                    this.classList.remove('border-transparent', 'text-salon-neutral');
+                    
+                    // Hide all content
+                    dashboardContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    
+                    // Show corresponding content
+                    const contentId = this.textContent.toLowerCase().trim() + '-tab';
+                    const targetContent = document.getElementById(contentId);
+                    if (targetContent) {
+                        targetContent.classList.remove('hidden');
+                    }
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Form validation for booking form
+            const bookingForm = document.querySelector('#booking form');
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement form validation and submission
+                    console.log('Booking form submitted');
+                    alert('Booking form submitted! (This is a mockup)');
+                });
+            }
+            
+            // Payment button handlers
+            const paymentButtons = document.querySelectorAll('button[type="button"]');
+            paymentButtons.forEach(button => {
+                if (button.textContent.includes('Pay')) {
+                    button.addEventListener('click', function() {
+                        // TODO: Implement payment processing
+                        console.log('Payment button clicked:', this.textContent);
+                        alert('Payment processing would be implemented here');
+                    });
+                }
+            });
+            
+            // Message sending functionality
+            const messageInput = document.querySelector('input[placeholder="Type your message..."]');
+            const sendButton = document.querySelector('.fa-paper-plane');
+            
+            if (messageInput && sendButton) {
+                sendButton.parentElement.addEventListener('click', function() {
+                    const message = messageInput.value.trim();
+                    if (message) {
+                        // TODO: Implement real-time messaging
+                        console.log('Message sent:', message);
+                        messageInput.value = '';
+                        alert('Message sent! (This is a mockup)');
+                    }
+                });
+                
+                messageInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendButton.parentElement.click();
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
