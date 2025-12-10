@@ -15,10 +15,10 @@ if (!fs.existsSync(indexPath)) {
 }
 
 // Read the built index.html
-const indexContent = fs.readFileSync(indexPath, 'utf-8');
+let indexContent = fs.readFileSync(indexPath, 'utf-8');
 
-// Create 404.html with redirect script
-// This script handles GitHub Pages 404 redirects for SPAs
+// For GitHub Pages, we'll use the redirect script approach
+// This converts /RosaSalon/dashboard to /RosaSalon/?/dashboard
 const redirectScript = `
     <script>
       // GitHub Pages 404.html redirect for SPA routing
@@ -37,9 +37,19 @@ const redirectScript = `
 `;
 
 // Insert the redirect script before the closing </head> tag
-const notFoundContent = indexContent.replace('</head>', redirectScript + '</head>');
+// Make sure we don't duplicate it if it already exists
+if (!indexContent.includes('pathSegmentsToKeep')) {
+  indexContent = indexContent.replace('</head>', redirectScript + '</head>');
+}
+const notFoundContent = indexContent;
 
 // Write 404.html
 fs.writeFileSync(notFoundPath, notFoundContent, 'utf-8');
+
+// Also create .nojekyll file to prevent Jekyll processing
+const nojekyllPath = path.join(distPath, '.nojekyll');
+fs.writeFileSync(nojekyllPath, '', 'utf-8');
+
 console.log('✓ Created 404.html for GitHub Pages SPA routing');
+console.log('✓ Created .nojekyll file');
 

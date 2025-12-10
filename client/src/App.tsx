@@ -20,14 +20,16 @@ function useGitHubPagesRedirect() {
   
   useEffect(() => {
     const search = window.location.search;
+    const pathname = window.location.pathname;
     
     // Check if we have the GitHub Pages redirect format: /?/path
     // The redirect script converts /RosaSalon/dashboard to /RosaSalon/?/dashboard
     if (search.startsWith('?/')) {
       const redirectPath = '/' + search.slice(2).replace(/~and~/g, '&').split('&')[0];
       setLocation(redirectPath);
-      // Clean up the URL - remove the query parameter
-      const newUrl = window.location.pathname + (window.location.hash || '');
+      // Clean up the URL - remove the query parameter but keep the base path
+      const basePath = pathname.split('/').slice(0, 2).join('/'); // Get /RosaSalon
+      const newUrl = basePath + redirectPath + (window.location.hash || '');
       window.history.replaceState({}, '', newUrl);
     }
   }, [setLocation]);
