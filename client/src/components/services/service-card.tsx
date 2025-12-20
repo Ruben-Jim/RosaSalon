@@ -34,14 +34,14 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           <div className="flex items-center gap-1 text-muted-foreground">
             <Clock className="w-4 h-4" />
             <span className="text-sm">{service.duration} min</span>
-          </div>
-          <div className="text-right">
+              </div>
+              <div className="text-right">
             <p className="text-2xl font-bold text-primary">${service.price}</p>
             <p className="text-xs text-muted-foreground flex items-center justify-end gap-1">
               <DollarSign className="w-3 h-3" />
               {service.downPayment} deposit
-            </p>
-          </div>
+                </p>
+              </div>
         </div>
 
         {/* Book Button */}
