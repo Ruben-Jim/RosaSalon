@@ -19,17 +19,28 @@ const bookingFormSchema = z.object({
   appointmentDate: z.string().min(1, "Please select a date"),
   appointmentTime: z.string().min(1, "Please select a time"),
   customerName: z.string().min(1, "Name is required"),
-  customerPhone: z.string().min(10, "Valid phone number required"),
+  customerPhone: z.string().min(14, "Valid phone number required"),
   customerEmail: z.string().email("Valid email required"),
   specialRequests: z.string().optional(),
 });
 
 type BookingFormData = z.infer<typeof bookingFormSchema>;
 
+// Format phone number as (XXX) XXX-XXXX
+const formatPhoneNumber = (value: string): string => {
+  const numbers = value.replace(/\D/g, "");
+  if (numbers.length <= 3) {
+    return numbers.length > 0 ? `(${numbers}` : "";
+  }
+  if (numbers.length <= 6) {
+    return `(${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
+  }
+  return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`;
+};
+
 export default function BookingForm() {
   const { toast } = useToast();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
   
   const { data: services, isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
@@ -55,7 +66,6 @@ export default function BookingForm() {
       });
       form.reset();
       setSelectedService(null);
-      setSelectedCategory("");
     },
     onError: (error: any) => {
       toast({
@@ -78,22 +88,6 @@ export default function BookingForm() {
       specialRequests: "",
     },
   });
-
-  const servicesByCategory = {
-    hair: services?.filter(s => s.category === "hair") || [],
-    eye: services?.filter(s => s.category === "eye") || [],
-    special: services?.filter(s => s.category === "special") || [],
-  };
-
-  const filteredServices = selectedCategory 
-    ? servicesByCategory[selectedCategory as keyof typeof servicesByCategory] || []
-    : services || [];
-
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-    form.setValue("serviceId", "");
-    setSelectedService(null);
-  };
 
   const handleServiceChange = (serviceId: string) => {
     const service = services?.find(s => s.id.toString() === serviceId);
@@ -178,51 +172,32 @@ export default function BookingForm() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {/* Service Selection */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
-                  Select Service Category
-                </label>
-                <Select onValueChange={handleCategoryChange} value={selectedCategory}>
-                  <SelectTrigger className="w-full p-4 bg-input border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent transition-all">
-                    <SelectValue placeholder="Choose a category..." />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="">All Categories</SelectItem>
-                    <SelectItem value="hair">Hair Services</SelectItem>
-                    <SelectItem value="eye">Eye Services</SelectItem>
-                    <SelectItem value="special">Special Services</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <FormField
-                control={form.control}
-                name="serviceId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-semibold text-foreground">
-                      Select Specific Service
-                    </FormLabel>
-                    <FormControl>
-                      <Select onValueChange={handleServiceChange} value={field.value}>
-                        <SelectTrigger className="w-full p-4 bg-input border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent transition-all">
-                          <SelectValue placeholder="Choose a service..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {filteredServices.map((service) => (
-                            <SelectItem key={service.id} value={service.id.toString()}>
-                              {service.name} - ${service.price}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="serviceId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-semibold text-foreground">
+                    Select Hair Service
+                  </FormLabel>
+                  <FormControl>
+                    <Select onValueChange={handleServiceChange} value={field.value}>
+                      <SelectTrigger className="w-full p-4 bg-input border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent transition-all">
+                        <SelectValue placeholder="Choose a service..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {services?.map((service) => (
+                          <SelectItem key={service.id} value={service.id.toString()}>
+                            {service.name} - ${service.price}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             {/* Date and Time Selection */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -313,7 +288,11 @@ export default function BookingForm() {
                         type="tel"
                         placeholder="(555) 123-4567" 
                         className="w-full p-4 bg-input border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
-                        {...field} 
+                        value={field.value}
+                        onChange={(e) => {
+                          const formatted = formatPhoneNumber(e.target.value);
+                          field.onChange(formatted);
+                        }}
                       />
                     </FormControl>
                     <FormMessage />

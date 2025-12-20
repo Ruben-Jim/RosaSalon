@@ -81,7 +81,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/">
               <h1 className="text-2xl font-serif font-bold text-primary cursor-pointer">
-                Bella Beauty
+                Rosa's Beauty Salon
               </h1>
             </Link>
           </div>

@@ -9,9 +9,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { CalendarCheck, CreditCard } from "lucide-react";
+import { CreditCard } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { PaymentModal } from "@/components/booking/payment-modal";
 import type { Service } from "@shared/schema";
 
 const bookingSchema = z.object({
@@ -19,16 +20,30 @@ const bookingSchema = z.object({
   appointmentDate: z.string().min(1, "Please select a date"),
   appointmentTime: z.string().min(1, "Please select a time"),
   customerName: z.string().min(1, "Name is required"),
-  customerPhone: z.string().min(10, "Valid phone number required"),
+  customerPhone: z.string().min(14, "Valid phone number required"),
   customerEmail: z.string().email("Valid email required"),
   specialRequests: z.string().optional(),
 });
 
 type BookingForm = z.infer<typeof bookingSchema>;
 
+// Format phone number as (XXX) XXX-XXXX
+const formatPhoneNumber = (value: string): string => {
+  const numbers = value.replace(/\D/g, "");
+  if (numbers.length <= 3) {
+    return numbers.length > 0 ? `(${numbers}` : "";
+  }
+  if (numbers.length <= 6) {
+    return `(${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
+  }
+  return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`;
+};
+
 export default function Booking() {
   const { toast } = useToast();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [pendingFormData, setPendingFormData] = useState<BookingForm | null>(null);
   
   const { data: services, isLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
@@ -42,7 +57,16 @@ export default function Booking() {
   });
 
   const createAppointmentMutation = useMutation({
-    mutationFn: async (appointmentData: any) => {
+    mutationFn: async (appointmentData: {
+      customerId: number;
+      serviceId: number;
+      appointmentDate: string;
+      specialRequests: string;
+      status: string;
+      downPaymentPaid: boolean;
+      totalPaid: boolean;
+      paymentId?: string;
+    }) => {
       const response = await apiRequest("POST", "/api/appointments", appointmentData);
       return response.json();
     },
@@ -50,12 +74,13 @@ export default function Booking() {
       queryClient.invalidateQueries({ queryKey: ["/api/appointments"] });
       toast({
         title: "Appointment Booked!",
-        description: "Your appointment has been successfully scheduled.",
+        description: "Your appointment has been successfully scheduled and paid.",
       });
       form.reset();
       setSelectedService(null);
+      setPendingFormData(null);
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast({
         title: "Booking Failed",
         description: error.message,
@@ -83,49 +108,62 @@ export default function Booking() {
     form.setValue("serviceId", serviceId);
   };
 
-  const onSubmit = async (data: BookingForm) => {
+  // Validate form and open payment modal
+  const handleBookAndPay = async () => {
+    const isValid = await form.trigger();
+    if (!isValid) {
+      toast({
+        title: "Please fill all required fields",
+        description: "Check the form for any missing information.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!selectedService) {
+      toast({
+        title: "No service selected",
+        description: "Please select a service before proceeding.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Store form data and open payment modal
+    setPendingFormData(form.getValues());
+    setShowPaymentModal(true);
+  };
+
+  // Called after successful payment
+  const handlePaymentSuccess = async (paymentId: string) => {
+    if (!pendingFormData || !selectedService) return;
+
     try {
-      // First create customer
+      // Create customer
       const customer = await createCustomerMutation.mutateAsync({
-        name: data.customerName,
-        email: data.customerEmail,
-        phone: data.customerPhone,
+        name: pendingFormData.customerName,
+        email: pendingFormData.customerEmail,
+        phone: pendingFormData.customerPhone,
       });
 
-      // Then create appointment
-      const appointmentDateTime = `${data.appointmentDate}T${data.appointmentTime}:00`;
+      // Create appointment with payment info
+      const appointmentDateTime = `${pendingFormData.appointmentDate}T${pendingFormData.appointmentTime}:00`;
       
       await createAppointmentMutation.mutateAsync({
         customerId: customer.id,
-        serviceId: parseInt(data.serviceId),
+        serviceId: parseInt(pendingFormData.serviceId),
         appointmentDate: appointmentDateTime,
-        specialRequests: data.specialRequests,
-        status: "pending",
-        downPaymentPaid: false,
+        specialRequests: pendingFormData.specialRequests || "",
+        status: "confirmed",
+        downPaymentPaid: true,
         totalPaid: false,
+        paymentId,
       });
     } catch (error) {
-      console.error("Booking error:", error);
-    }
-  };
-
-  const handlePayment = async () => {
-    if (!selectedService) return;
-    
-    try {
-      const response = await apiRequest("POST", "/api/create-payment-intent", {
-        amount: parseFloat(selectedService.downPayment)
-      });
-      const { clientSecret } = await response.json();
-      
+      console.error("Booking error after payment:", error);
       toast({
-        title: "Payment Processing",
-        description: "This would integrate with Stripe for actual payment processing.",
-      });
-    } catch (error) {
-      toast({
-        title: "Payment Error",
-        description: "Unable to process payment at this time.",
+        title: "Booking Error",
+        description: "Payment was successful but there was an error creating your appointment. Please contact us.",
         variant: "destructive",
       });
     }
@@ -159,7 +197,7 @@ export default function Booking() {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form className="space-y-6">
                 {/* Service Selection */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField
@@ -257,7 +295,14 @@ export default function Booking() {
                       <FormItem>
                         <FormLabel>Phone Number</FormLabel>
                         <FormControl>
-                          <Input placeholder="(555) 123-4567" {...field} />
+                          <Input 
+                            placeholder="(555) 123-4567" 
+                            value={field.value}
+                            onChange={(e) => {
+                              const formatted = formatPhoneNumber(e.target.value);
+                              field.onChange(formatted);
+                            }}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -296,17 +341,17 @@ export default function Booking() {
                   )}
                 />
 
-                {/* Payment Section */}
+                {/* Payment Summary */}
                 {selectedService && (
                   <div className="border-t border-border pt-6">
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Down Payment Required</h3>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">Payment Summary</h3>
                     <div className="bg-muted p-4 rounded-lg mb-4">
                       <div className="flex justify-between items-center">
                         <span className="text-foreground">Service Total:</span>
                         <span className="font-bold text-foreground">${selectedService.price}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-foreground">Down Payment:</span>
+                        <span className="text-foreground">Down Payment Due Now:</span>
                         <span className="font-bold text-primary">${selectedService.downPayment}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm text-muted-foreground">
@@ -314,52 +359,40 @@ export default function Booking() {
                         <span>${(parseFloat(selectedService.price) - parseFloat(selectedService.downPayment)).toFixed(2)}</span>
                       </div>
                     </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                      <Button 
-                        type="button" 
-                        variant="outline" 
-                        className="flex items-center justify-center"
-                        onClick={handlePayment}
-                      >
-                        <i className="fab fa-apple text-2xl mr-2"></i>
-                        Apple Pay
-                      </Button>
-                      <Button 
-                        type="button" 
-                        variant="outline" 
-                        className="flex items-center justify-center"
-                        onClick={handlePayment}
-                      >
-                        <i className="fab fa-google text-2xl mr-2"></i>
-                        Google Pay
-                      </Button>
-                      <Button 
-                        type="button" 
-                        variant="outline" 
-                        className="flex items-center justify-center"
-                        onClick={handlePayment}
-                      >
-                        <CreditCard className="w-6 h-6 mr-2" />
-                        Card
-                      </Button>
-                    </div>
                   </div>
                 )}
 
+                {/* Book & Pay Button */}
                 <Button 
-                  type="submit" 
-                  className="w-full btn-primary py-4 text-lg font-semibold"
-                  disabled={createAppointmentMutation.isPending}
+                  type="button"
+                  onClick={handleBookAndPay}
+                  className="w-full btn-primary py-6 text-lg font-semibold"
+                  disabled={createAppointmentMutation.isPending || createCustomerMutation.isPending}
                 >
-                  <CalendarCheck className="w-5 h-5 mr-2" />
-                  {createAppointmentMutation.isPending ? "Booking..." : "Book Appointment"}
+                  <CreditCard className="w-5 h-5 mr-2" />
+                  {(createAppointmentMutation.isPending || createCustomerMutation.isPending) 
+                    ? "Processing..." 
+                    : "Book Appointment & Pay"
+                  }
                 </Button>
               </form>
             </Form>
           </CardContent>
         </Card>
       </div>
+
+      {/* Payment Modal */}
+      {selectedService && pendingFormData && (
+        <PaymentModal
+          open={showPaymentModal}
+          onOpenChange={setShowPaymentModal}
+          amount={selectedService.downPayment}
+          serviceName={selectedService.name}
+          customerName={pendingFormData.customerName}
+          customerEmail={pendingFormData.customerEmail}
+          onPaymentSuccess={handlePaymentSuccess}
+        />
+      )}
     </div>
   );
 }

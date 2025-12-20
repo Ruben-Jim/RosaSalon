@@ -11,11 +11,12 @@ export const users = pgTable("users", {
 export const services = pgTable("services", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  category: text("category").notNull(), // hair, eye, special
+  category: text("category").notNull(), // hair
   price: decimal("price", { precision: 10, scale: 2 }).notNull(),
   downPayment: decimal("down_payment", { precision: 10, scale: 2 }).notNull(),
   duration: integer("duration").notNull(), // in minutes
   description: text("description"),
+  image: text("image"), // URL to service image
 });
 
 export const customers = pgTable("customers", {
