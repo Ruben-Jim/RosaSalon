@@ -2,11 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-// Base path for GitHub Pages
-const base = process.env.GITHUB_PAGES === "true" ? "/RosaSalon/" : "/";
 
 export default defineConfig({
-  base,
+
   plugins: [
     react(),
   ],
